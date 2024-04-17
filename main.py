@@ -6,7 +6,6 @@ def create_institution_file(file_name):
     institution_id = 1
     with open(file_name) as csvfile:
         reader = csv.DictReader(csvfile)
-        # next(reader)  # Ignore the header
 
         for row in reader:
             institution_name = row['Institution']
@@ -14,8 +13,8 @@ def create_institution_file(file_name):
             state_province = row['State/Province']
             country = row['Country']
             # Adding institution to the dictionary if not already present
-            if (institution_name, city, state_province, country) not in institutions.values():
-                institutions[institution_id] = {
+            if institution_name not in institutions:
+                institutions[institution_name] = {
                     'Institution ID': institution_id,
                     'Institution Name': institution_name,
                     'City': city,
@@ -31,35 +30,32 @@ def create_institution_file(file_name):
         writer = csv.DictWriter(csvfile, fieldnames=headers)
         writer.writeheader()
         for institution_id, details in institutions.items():
-            details['Institution Name'] = institution_name
             writer.writerow(details)
 
 
 def create_team_file(file_name):
     institutions = {}
+    with open('Institutions.csv') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            institutions[row['Institution Name']] = row['Institution ID']
+
     with open(file_name) as csvfile:
         reader = csv.DictReader(csvfile)
-        next(reader)  # Ignore the header
-        for row in reader:
-            team_number = row['Team Number']
-            advisor = row['Advisor']
-            problem = row['Problem']
-            ranking = row['Ranking']
 
-    with open('Teams.csv', 'w') as csvfile:
-        headers = ['Team Number', 'Advisor', 'Problem', 'Ranking', 'Institution ID']
-        writer = csv.DictWriter(csvfile, fieldnames=headers)
-        writer.writeheader()
-        # Write each team to the file
-        with open(file_name) as csvfile:
-            reader = csv.DictReader(csvfile)
-            next(reader)  # Ignore the header
+        with open('Teams.csv', 'w', newline='') as csvfile:
+            headers = ['Team Number', 'Advisor', 'Problem', 'Ranking', 'Institution ID']
+            writer = csv.DictWriter(csvfile, fieldnames=headers)
+            writer.writeheader()
+
+            # Write each team to the file
             for row in reader:
                 writer.writerow({
-                    'Team Number': team_number,
-                    'Advisor': advisor,
-                    'Problem': problem,
-                    'Ranking': ranking,
+                    'Team Number': row['Team Number'],
+                    'Advisor': row['Advisor'],
+                    'Problem': row['Problem'],
+                    'Ranking': row['Ranking'],
+                    'Institution ID': institutions.get(row['Institution'])
                 })
 
 
