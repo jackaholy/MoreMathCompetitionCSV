@@ -26,4 +26,4 @@ depending on the version of python you have installed.
 
 ## Result
 After running the program you will find two new csv files in your directory.
-They should be called "Institutions.csv" and "Teams.csv"
+They should be called "Institutions.csv" and "Teams.csv".
