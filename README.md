@@ -17,4 +17,17 @@ git clone https://github.com/jackaholy/MathCompetitionCSV
 While in the proper directory run:
 ```shell
 python main.py
+<<<<<<< HEAD
 ```# MoreMathCompetitionCSV
+=======
+```
+or
+```shell
+python3 main.py
+```
+depending on the version of python you have installed.
+
+## Result
+After running the program you will find two new csv files in your directory.
+They should be called "Institutions.csv" and "Teams.csv".
+>>>>>>> 70ad52e27ed2a19ba64681f06bba1e47a2209b37
