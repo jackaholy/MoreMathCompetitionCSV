@@ -11,7 +11,7 @@ Next, create a new directory and navigate to where you want the project to be lo
 
 Go to the terminal or command line and run:
 ```shell
-git clone https://github.com/jackaholy/MathCompetitionCSV
+git clone https://github.com/jackaholy/MoreMathCompetitionCSV
 ```
 ## Usage
 
